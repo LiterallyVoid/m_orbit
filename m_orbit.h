@@ -406,8 +406,8 @@ morbElements morbVectorsToElements(morbVectors vectors, morbEl mu) {
 	// --- between 0 and π/2 for a counter-clockwise orbit, or between π/2 and π
 	// for a clockwise orbit.
 	elements.inclination = MORB_ATAN2(
-		morbDot(specific_angular_momentum, ascending_node_vector),
-		morbDot(specific_angular_momentum_normalized, ascent_vector_equatorial)
+		-morbDot(specific_angular_momentum_normalized, ascent_vector_equatorial),
+		specific_angular_momentum_normalized.v[2]
 	);
 
 	const morbVec ascent_vector_inclined = morbNormalize3(morbCross3(specific_angular_momentum_normalized, ascending_node_vector));
@@ -613,6 +613,10 @@ int main(int argc, char **argv) {
 		{
 			{ 1, 0, 0, 0 },
 			{ 5, 5, 0, 0 },
+		},
+		{
+			{ 1, 0, 0, 0 },
+			{ 0.7, 0.3, 0.5, 0 },
 		},
 	};
 
